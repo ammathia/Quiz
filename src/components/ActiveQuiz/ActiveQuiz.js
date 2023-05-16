@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "./ActiveQuiz.module.scss"
+import AnswersList from "../AnswersList/AnswersList";
 
 
-
-function ActiveQuiz() {
+function ActiveQuiz(props) {
 
 
 
@@ -12,18 +12,13 @@ function ActiveQuiz() {
             <p>
                 <span className={classes.ActiveQuestion}>
                 <strong>
-                    What is the radius if the Earth?
+                    {props.question}
                 </strong>
                 </span>
-                <small>1 of 12</small>
+                <small>{props.answerNumber} of {props.quizLength}</small>
             </p>
 
-            <ol>
-                <li>8000km</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-            </ol>
+            <AnswersList onAnswerClick={props.onAnswerClick} answers={props.answers} />
         </div>
     )
 }
