@@ -15,13 +15,23 @@ const Quiz = props => {
             {text:"6371 km", id: 2},
             {text:"3389 km", id: 3},
             {text:"300,000 km/s", id: 4},
+        ]},
+        {
+            question: "What is the distance between the and the Sun?",
+            rightAnswer: 3,
+            answers: [ 
+            {text:"1000 km", id: 1},
+            {text:"384000 km", id: 2},
+            {text:"149 mln km", id: 3},
+            {text:"10 bn km", id: 4},
         ]}
-        ]
+        ],
     });
 
 
     const onClickAnswerHandler = answerId => {
-        console.log(answerId)
+        setState({...state,activeNumber: state.activeNumber + 1})
+        console.log(state.quiz.length)
     }
 
     return(
@@ -33,7 +43,8 @@ const Quiz = props => {
                 onAnswerClick={onClickAnswerHandler}
                 quizLength={state.quiz.length}
                 answerNumber={state.activeNumber + 1}
-                 question={state.quiz[0].question} answers={state.quiz[0].answers} />
+                 question={state.quiz[state.activeNumber].question} 
+                 answers={state.quiz[state.activeNumber].answers} />
             </div>
         </div>
     )
