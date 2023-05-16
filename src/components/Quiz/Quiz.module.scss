@@ -1,0 +1,19 @@
+.Quiz {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 2rem;
+
+    width: 100%;
+    align-items: center;
+
+}
+
+.Quiz h1 {
+    font-size: 3rem ;
+
+}
+
+.QuizWrapper {
+    min-width: 1000px;
+}
