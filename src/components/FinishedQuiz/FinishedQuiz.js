@@ -15,7 +15,13 @@ const FinishedQuiz = () => {
           How are you?
           <i className={""}></i>
         </li>
-        <p style={{ margin: "10px" }}>Right answers 4 out of 12</p>
+        <hr />
+        <div className={classes.corAns}>
+          <p>Right answers 4 out of 12</p>
+          <button type="button" className={classes.btn}>
+            Restart
+          </button>
+        </div>
       </ul>
     </div>
   );

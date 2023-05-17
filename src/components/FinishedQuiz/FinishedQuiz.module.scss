@@ -1,6 +1,6 @@
 .FinishedQuiz {
   border: 1px solid #fff;
-  width: 29rem;
+  min-width: 29rem;
   font-size: 0.7rem;
   border-radius: 0.4rem;
 }
@@ -13,4 +13,28 @@
 
 .FinishedQuiz ul li {
   margin: 10px;
+}
+
+.btn {
+  display: inline;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 0.7rem;
+  border-radius: 10px;
+  background-color: rgba(25, 27, 157, 0.1);
+  padding: 5px 13px;
+}
+
+.corAns p {
+  align-items: center;
+  display: flex;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  text-align: center;
+}
+.corAns {
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
