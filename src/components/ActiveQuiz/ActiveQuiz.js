@@ -9,7 +9,7 @@ function ActiveQuiz(props) {
         <span className={classes.ActiveQuestion}>
           <strong>{props.question}</strong>
         </span>
-        <small>
+        <small style={{ margin: "5px 10px 5px 40px" }}>
           {props.answerNumber} of {props.quizLength}
         </small>
       </p>
@@ -17,6 +17,7 @@ function ActiveQuiz(props) {
       <AnswersList
         onAnswerClick={props.onAnswerClick}
         answers={props.answers}
+        state={props.state}
       />
     </div>
   );
