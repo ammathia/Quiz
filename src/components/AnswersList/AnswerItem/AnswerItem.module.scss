@@ -11,6 +11,7 @@
 .AnswerItem:hover {
   background: rgba(216, 207, 237, 0.3);
   transition: background 0.3s ease-in-out;
+  box-shadow: 0 0 4px #fff;
 }
 
 .AnswerItem.success {

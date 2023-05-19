@@ -25,26 +25,12 @@ const FinishedQuiz = (props) => {
             </li>
           );
         })}
-
-        {/* <li>
-          <strong>1. </strong>
-          How are you?
-          <i className={"fa fa-times " + classes.error}></i>
-        </li>
-        <li>
-          <strong>2. </strong>
-          How are you?
-          <i className={"fa fa-check " + classes.success}></i>
-        </li> */}
         <hr />
         <div className={classes.corAns}>
-          <p>
-            <strong>
-              {" "}
-              Right answers {successCount} out of {props.quiz.length}{" "}
-            </strong>
-          </p>
-          <button type="button" className={classes.btn}>
+          <strong>
+            Correct answers {successCount} out of {props.quiz.length}{" "}
+          </strong>
+          <button onClick={props.onRetry} type="button" className={classes.btn}>
             Restart
           </button>
         </div>

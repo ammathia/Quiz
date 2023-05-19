@@ -71,6 +71,16 @@ const Quiz = (props) => {
     }
   };
 
+  const onRetryHandler = () => {
+    setState({
+      ...state,
+      isFinished: false,
+      activeNumber: 0,
+      results: {},
+      answerState: null,
+    });
+  };
+
   const isQuizFinished = () => {
     return state.activeNumber + 1 === state.quiz.length;
   };
@@ -80,7 +90,11 @@ const Quiz = (props) => {
       <h1>Quiz</h1>
 
       {state.isFinished ? (
-        <FinishedQuiz results={state.results} quiz={state.quiz} />
+        <FinishedQuiz
+          results={state.results}
+          quiz={state.quiz}
+          onRetry={onRetryHandler}
+        />
       ) : (
         <div className={classes.QuizWrapper}>
           <ActiveQuiz
