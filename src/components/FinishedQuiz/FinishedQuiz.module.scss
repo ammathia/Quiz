@@ -38,3 +38,15 @@
   display: flex;
   justify-content: space-around;
 }
+
+.FinishedQuiz ul li i {
+  margin-left: 10px;
+}
+
+.success {
+  color: rgb(7, 185, 7);
+}
+
+.error {
+  color: red;
+}

@@ -7,6 +7,7 @@ const Quiz = (props) => {
   const [state, setState] = useState({
     isFinished: false,
     activeNumber: 0,
+    results: {},
     answerState: null,
     quiz: [
       {
@@ -41,10 +42,17 @@ const Quiz = (props) => {
         return;
       }
     }
+
+    const results = state.results;
     const question = state.quiz[state.activeNumber];
 
     if (question.rightAnswer === answerId) {
-      setState({ ...state, answerState: { [answerId]: "success" } });
+      if (!results[question.id]) {
+        results[question.id] = "success";
+      }
+
+      setState({ ...state, answerState: { [answerId]: "success" }, results });
+
       const timeout = window.setTimeout(() => {
         if (isQuizFinished()) {
           console.log("finished");
@@ -58,7 +66,8 @@ const Quiz = (props) => {
         }
       }, 1000);
     } else {
-      setState({ ...state, answerState: { [answerId]: "error" } });
+      results[question.id] = "error";
+      setState({ ...state, answerState: { [answerId]: "error", results } });
     }
   };
 
@@ -71,7 +80,7 @@ const Quiz = (props) => {
       <h1>Quiz</h1>
 
       {state.isFinished ? (
-        <FinishedQuiz />
+        <FinishedQuiz results={state.results} quiz={state.quiz} />
       ) : (
         <div className={classes.QuizWrapper}>
           <ActiveQuiz
