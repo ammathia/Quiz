@@ -64,7 +64,7 @@ const Quiz = (props) => {
             answerState: null,
           });
         }
-      }, 1000);
+      }, 500);
     } else {
       results[question.id] = "error";
       setState({ ...state, answerState: { [answerId]: "error", results } });
