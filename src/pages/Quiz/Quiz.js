@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Quiz.module.scss";
-import ActiveQuiz from "../ActiveQuiz/ActiveQuiz";
-import FinishedQuiz from "../FinishedQuiz/FinishedQuiz";
+import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
+import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
 
 const Quiz = (props) => {
   const [state, setState] = useState({
@@ -111,4 +111,4 @@ const Quiz = (props) => {
   );
 };
 
-export default Quiz;
+export { Quiz };

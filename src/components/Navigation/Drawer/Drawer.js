@@ -1,9 +1,10 @@
 import React from "react";
 import classes from "./Drawer.module.scss";
 import Backdrop from "../../UI/Backdrop/Backdrop";
+import { Link } from "react-router-dom";
 
-const links = [1, 2, 3];
 function Drawer(props) {
+  const links = [1, 2, 3];
   const cls = [classes.Drawer];
   if (!props.isOpen) {
     cls.push(classes.closed);
