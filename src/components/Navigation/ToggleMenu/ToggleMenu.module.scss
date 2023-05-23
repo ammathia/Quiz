@@ -1,0 +1,16 @@
+.ToggleMenu {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  font-size: 2rem;
+  z-index: 50;
+  transition: all 0.2s ease-in;
+}
+
+.ToggleMenu:hover {
+  opacity: 0.7;
+}
+
+.ToggleMenu.open {
+  left: 11rem;
+}

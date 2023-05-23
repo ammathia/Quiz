@@ -9,7 +9,7 @@ function ActiveQuiz(props) {
         <span className={classes.ActiveQuestion}>
           <strong>{props.question}</strong>
         </span>
-        <small style={{ margin: "5px 10px 5px 40px" }}>
+        <small style={{ fontSize: "1rem", margin: "5px 10px 10px 5px" }}>
           {props.answerNumber} of {props.quizLength}
         </small>
       </p>

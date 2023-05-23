@@ -29,7 +29,7 @@ const Quiz = (props) => {
           { text: "1000 km", id: 1 },
           { text: "384000 km", id: 2 },
           { text: "149 mln km", id: 3 },
-          { text: "10 bn km", id: 4 },
+          { text: "10 bln km", id: 4 },
         ],
       },
     ],
