@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import classes from "./Quiz.module.scss";
+import classes from "./QuizMath.module.scss";
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
 
-const Quiz = (props) => {
+const QuizMath = (props) => {
   const [state, setState] = useState({
     isFinished: false,
     activeNumber: 0,
@@ -11,39 +11,36 @@ const Quiz = (props) => {
     answerState: null,
     quiz: [
       {
-        question: "What is the Earth's radius?",
-        rightAnswer: 2,
+        question: "Find the sum of 111 + 222 + 333",
+        rightAnswer: 4,
         id: 1,
         answers: [
-          { text: "10420.12 km", id: 1 },
-          { text: "6371 km", id: 2 },
-          { text: "3389 km", id: 3 },
-          { text: "300,000 km/s", id: 4 },
+          { text: "1000", id: 1 },
+          { text: "567", id: 2 },
+          { text: "112", id: 3 },
+          { text: "666", id: 4 },
         ],
       },
       {
-        question: "What is the distance between the Earth and the Sun?",
+        question: "What's 7x8 ?",
+        rightAnswer: 1,
+        id: 2,
+        answers: [
+          { text: "56", id: 1 },
+          { text: "62", id: 2 },
+          { text: "49", id: 3 },
+          { text: "54", id: 4 },
+        ],
+      },
+      {
+        question: 'Who invented the "0" ?',
         rightAnswer: 3,
         id: 2,
         answers: [
-          { text: "1000 km", id: 1 },
-          { text: "384000 km", id: 2 },
-          { text: "149 mln km", id: 3 },
-          { text: "10 bln km", id: 4 },
-        ],
-      },
-      {
-        question: 'What is an "astronomical unit" ?',
-        rightAnswer: 1,
-        id: 3,
-        answers: [
-          { text: "The distance between the Earth and the sun", id: 1 },
-          { text: "One of the measerments of the metric system", id: 2 },
-          { text: "The distance light travels in one year", id: 3 },
-          {
-            text: "The time taken by the light to travel from the Sun to the Earth",
-            id: 4,
-          },
+          { text: "Fibonacci", id: 1 },
+          { text: "Plato", id: 2 },
+          { text: "Mohammed ibn-Musa al-Khowarizmi", id: 3 },
+          { text: "Pythagoras", id: 4 },
         ],
       },
     ],
@@ -100,8 +97,8 @@ const Quiz = (props) => {
   };
 
   return (
-    <div className={classes.Quiz}>
-      <h1>Quiz</h1>
+    <div className={classes.QuizMath}>
+      <h1>Quiz.Math</h1>
 
       {state.isFinished ? (
         <FinishedQuiz
@@ -110,7 +107,7 @@ const Quiz = (props) => {
           onRetry={onRetryHandler}
         />
       ) : (
-        <div className={classes.QuizWrapper}>
+        <div className={classes.QuizMathWrapper}>
           <ActiveQuiz
             onAnswerClick={onClickAnswerHandler}
             quizLength={state.quiz.length}
@@ -125,4 +122,4 @@ const Quiz = (props) => {
   );
 };
 
-export { Quiz };
+export { QuizMath };

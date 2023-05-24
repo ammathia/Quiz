@@ -1,0 +1,17 @@
+.QuizMath {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 1rem;
+
+  width: 100%;
+  align-items: center;
+}
+
+.QuizMath h1 {
+  font-size: 3rem;
+}
+
+.QuizMathWrapper {
+  width: 60rem;
+}

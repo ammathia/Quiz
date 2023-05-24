@@ -2,7 +2,8 @@ import "./App.scss";
 import React from "react";
 import { Layout } from "./hoc/Layout/Layout";
 import { Quiz } from "./pages/Quiz/Quiz";
-import { Routes, Route } from "react-router-dom";
+import { QuizMath } from "./pages/QuizMath/QuizMath";
+import { Routes, Route, Link } from "react-router-dom";
 import Drawer from "./components/Navigation/Drawer/Drawer";
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Quiz />}></Route>
-          <Route></Route>
+          <Route path="/QuizMath" element={<QuizMath />}></Route>
           <Route></Route>
         </Route>
       </Routes>

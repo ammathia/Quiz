@@ -8,10 +8,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: white;
 }
 
 *,
 *::after,
 *::before {
   margin: 0;
+}
+a.active {
+  color: rgb(62, 130, 220);
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
 }
