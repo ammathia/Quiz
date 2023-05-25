@@ -1,0 +1,17 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.container li {
+  text-align: left;
+  font-size: 2rem;
+  font-weight: bold;
+  list-style-type: none;
+  margin-top: 3rem;
+}

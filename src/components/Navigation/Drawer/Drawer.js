@@ -9,15 +9,35 @@ function Drawer(props) {
     cls.push(classes.closed);
   }
 
+  const onClickHandler = () => {
+    props.onClose();
+  };
+
   return (
     <>
       <nav className={cls.join(" ")}>
         <ul>
           <li>
-            <NavLink to="/">Quiz</NavLink>
+            <NavLink onClick={onClickHandler} to="/QuizList">
+              QuizList
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/QuizMath">QuizMath</NavLink>
+            <NavLink onClick={onClickHandler} to="/">
+              Quiz
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={{
+                pathname: "/Quizmath",
+                search: "?a=1&b=2",
+                hash: "wfm-hash",
+              }}
+              onClick={onClickHandler}
+            >
+              QuizMath
+            </NavLink>
           </li>
         </ul>
         <p className={classes.about}>Made with React</p>

@@ -4,7 +4,8 @@ import { Layout } from "./hoc/Layout/Layout";
 import { Quiz } from "./pages/Quiz/Quiz";
 import { QuizMath } from "./pages/QuizMath/QuizMath";
 import { Routes, Route, Link } from "react-router-dom";
-import Drawer from "./components/Navigation/Drawer/Drawer";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
+import { QuizList } from "./pages/QuizList/QuizList";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Quiz />}></Route>
           <Route path="/QuizMath" element={<QuizMath />}></Route>
-          <Route></Route>
+          <Route path="/QuizList" element={<QuizList />}></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
         </Route>
       </Routes>
     </div>
