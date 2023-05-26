@@ -2,16 +2,19 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  text-align: center;
+  text-align: left;
   flex-direction: column;
   justify-content: start;
   align-items: center;
 }
 
 .container li {
-  text-align: left;
+  // text-align: center;
+  width: 20rem;
   font-size: 2rem;
+  padding-inline-start: 3rem;
   font-weight: bold;
-  list-style-type: none;
-  margin-top: 3rem;
+  // list-style-type: none;
+  margin-top: 2rem;
+  // transform: translateX(6rem);
 }

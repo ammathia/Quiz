@@ -6,6 +6,7 @@ import { QuizMath } from "./pages/QuizMath/QuizMath";
 import { Routes, Route, Link } from "react-router-dom";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { QuizList } from "./pages/QuizList/QuizList";
+import { CreateQuiz } from "./pages/CreateQuiz/CreateQuiz";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/QuizMath" element={<QuizMath />}></Route>
           <Route path="/QuizList" element={<QuizList />}></Route>
           <Route path="*" element={<NotFoundPage />}></Route>
+          <Route path="/CreateQuiz" element={<CreateQuiz />}></Route>
         </Route>
       </Routes>
     </div>

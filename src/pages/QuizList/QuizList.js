@@ -1,15 +1,18 @@
 import React from "react";
 import classes from "./QuizList.module.scss";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const QuizList = () => {
   return (
     <div className={classes.container}>
+      <h1 style={{ marginTop: "2rem" }}>
+        Here are some available quizes for you:
+      </h1>
       <li>
-        <NavLink to="/">Quiz</NavLink>
+        <Link to="/">Quiz</Link>
       </li>
       <li>
-        <NavLink
+        <Link
           to={{
             pathname: "/Quizmath",
             search: "?a=1&b=2",
@@ -17,7 +20,7 @@ const QuizList = () => {
           }}
         >
           QuizMath
-        </NavLink>
+        </Link>
       </li>
     </div>
   );
