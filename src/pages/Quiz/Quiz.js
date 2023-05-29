@@ -37,7 +37,7 @@ const Quiz = (props) => {
         rightAnswer: 1,
         id: 3,
         answers: [
-          { text: "The distance between the Earth and the sun", id: 1 },
+          { text: "The distance between the Earth and the Sun", id: 1 },
           { text: "One of the measerments of the metric system", id: 2 },
           { text: "The distance light travels in one year", id: 3 },
           {

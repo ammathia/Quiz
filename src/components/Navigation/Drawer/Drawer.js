@@ -23,6 +23,12 @@ function Drawer(props) {
             </NavLink>
           </li>
           <li>
+            <NavLink onClick={onClickHandler} to="/Login">
+              Login
+            </NavLink>
+          </li>
+          <li></li>
+          <li>
             <NavLink to="/CreateQuiz" onClick={onClickHandler}>
               CreateQuiz
             </NavLink>
