@@ -35,7 +35,7 @@ const QuizMath = (props) => {
       {
         question: 'Who invented the "0" ?',
         rightAnswer: 3,
-        id: 2,
+        id: 3,
         answers: [
           { text: "Fibonacci", id: 1 },
           { text: "Plato", id: 2 },

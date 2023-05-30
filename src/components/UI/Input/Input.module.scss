@@ -1,0 +1,30 @@
+.Input {
+  input {
+    text-align: center;
+    width: 20rem;
+    height: 3.2rem;
+    font-size: 1.3rem;
+    border-radius: 1rem;
+    padding: 5px;
+    margin-top: 1rem;
+  }
+
+  input:focus {
+    outline: #fff solid 1px;
+    box-shadow: 0 0 1rem #fff;
+  }
+  label {
+    font-weight: bold;
+  }
+  input::placeholder {
+    text-align: center;
+  }
+  span {
+    display: block;
+    font-size: 1rem;
+  }
+}
+
+.Input.invalid span {
+  color: red;
+}
