@@ -6,7 +6,7 @@
   border-radius: 10px;
   background-color: rgba(25, 27, 157, 0.1);
   padding: 5px 13px;
-  margin: 0 1.5rem;
+  margin: 1 1.5rem;
 }
 
 .btn:hover {
@@ -21,9 +21,9 @@
   background: #402a80;
 }
 
-.Button:disabled {
+.btn:disabled {
   background: #ccc;
-  color: #000;
+  color: #837f7f;
   cursor: not-allowed;
 }
 

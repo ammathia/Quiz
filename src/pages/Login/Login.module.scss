@@ -46,6 +46,13 @@
     button:active {
       box-shadow: 0 0 1rem #fff;
     }
+    button:disabled {
+      box-shadow: none;
+      background: #ccc;
+      color: #837f7f;
+      cursor: not-allowed;
+      background-color: rgba($color: #ccc, $alpha: 0.2);
+    }
     .create {
       font-size: 1rem;
       margin: 1rem;

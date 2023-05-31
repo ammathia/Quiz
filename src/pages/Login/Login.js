@@ -11,6 +11,7 @@ function emailValidation(email) {
 }
 const Login = (props) => {
   const [state, setState] = useState({
+    isFormValid: false,
     formControls: {
       email: {
         value: "",
@@ -47,6 +48,7 @@ const Login = (props) => {
     if (!validation) {
       return true;
     }
+
     let isValid = true;
     if (validation.required) {
       isValid = value.trim() !== "" && isValid;
@@ -65,9 +67,16 @@ const Login = (props) => {
 
     control.value = event.target.value;
     control.touched = true;
+    if (control.value == "") {
+      control.touched = false;
+    }
     control.valid = validateControl(control.value, control.validation);
     formControls[controlName] = control;
-    setState({ formControls });
+    let isFormValid = true;
+    Object.keys(formControls).forEach((name) => {
+      isFormValid = formControls[name].valid && isFormValid;
+    });
+    setState({ formControls, isFormValid });
   };
   function renderInputs() {
     return Object.keys(state.formControls).map((controlName, index) => {
@@ -101,7 +110,9 @@ const Login = (props) => {
             placeholder="Password"
             errorMessage="TEswevewvewwevt"
           ></Input> */}
-          <Button onClick={loginHandler}>Log-in</Button>
+          <Button disabled={!state.isFormValid} onClick={loginHandler}>
+            Log-in
+          </Button>
 
           <p className={classes.create}>Create account</p>
         </form>
