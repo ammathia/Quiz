@@ -14,13 +14,17 @@ const Input = (props) => {
   }
   return (
     <div className={cls.join(" ")}>
+      <label htmlFor="input">
+        <span>{props.label}</span>
       <input
         id={htmlFor}
         placeholder={props.placeholder}
         type={type}
         value={props.value}
         onChange={props.onChange}
+        name="input"
       />
+      </label>
       {isInvalid(props) ? (
         <span>{props.errorMessage || "Type in correct value"}</span>
       ) : null}

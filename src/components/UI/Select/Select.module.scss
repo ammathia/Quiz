@@ -1,0 +1,23 @@
+select {
+  display: inline;
+  font-size: 1.2rem;
+  width: 20rem;
+  background: rgba($color: #fff, $alpha: 0.6);
+  border-radius: 10px;
+  margin: 2rem;
+  text-align: center;
+  align-items: center;
+  border-radius: 10px;
+  height: 2rem;
+}
+select:focus {
+  outline: #fff solid 1px;
+  box-shadow: 0 0 1rem #fff;
+}
+select option::selection {
+  background-color: rgba($color: #961818, $alpha: 0.6);
+}
+label {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
