@@ -49,6 +49,7 @@ const CreateQuiz = () => {
     quiz: [],
     isFormValid: false,
     rightAnswerid: 1,
+    selectTouch: false,
     formControls: createControlForms(),
   });
   const onSubmitHandler = (event) => {
@@ -56,14 +57,52 @@ const CreateQuiz = () => {
   };
   const addQuestionHandler = (event) => {
     event.preventDefault();
+
+    const quiz = state.quiz.concat();
+    const index = quiz.length + 1;
+
+    const { question, option1, option2, option3, option4 } = state.formControls;
+
+    const questionItem = {
+      question: question.value,
+      id: index,
+      rightAnswerid: state.rightAnswerid,
+      answers: [
+        {
+          text: option1.value,
+          id: option1.id,
+        },
+        {
+          text: option2.value,
+          id: option2.id,
+        },
+        {
+          text: option3.value,
+          id: option3.id,
+        },
+        {
+          text: option4.value,
+          id: option4.id,
+        },
+      ],
+    };
+    quiz.push(questionItem);
+    setState({
+      quiz,
+      isFormValid: false,
+      rightAnswerid: 1,
+      selectTouch: false,
+      formControls: createControlForms(),
+    });
   };
   const addQuizHandler = (event) => {
     event.preventDefault();
   };
-
   const onChangeHandler = (value, controlName) => {
     const formControls = { ...state.formControls };
     const control = { ...formControls[controlName] };
+
+    const selectTouch = state.selectTouch;
 
     control.value = value;
     control.touched = true;
@@ -104,6 +143,7 @@ const CreateQuiz = () => {
     setState({
       ...state,
       rightAnswerid: +event.target.value,
+      selectTouch: true,
     });
   };
   const select = (
@@ -127,13 +167,13 @@ const CreateQuiz = () => {
           {renderControls()}
           {select}
           <br />
-          <Button disabled={!state.isFormValid} onClick={addQuizHandler}>
-            Add Question
-          </Button>
           <Button
-            disabled={state.quiz.length === 0}
+            disabled={!state.selectTouch || !state.isFormValid}
             onClick={addQuestionHandler}
           >
+            Add Question
+          </Button>
+          <Button disabled={state.quiz.length === 0} onClick={addQuizHandler}>
             Create Quiz
           </Button>
           <br />

@@ -8,7 +8,7 @@ export function createControl(config, validation) {
   };
 }
 
-export function validate(value, validation = null) {
+export function validate(value, validation = null, selectTouch) {
   if (!validation) {
     return true;
   }
