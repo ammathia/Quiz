@@ -6,13 +6,17 @@ import Form from "react-bootstrap/Form";
 import FormSelect from "react-bootstrap/FormSelect";
 import Select from "../../components/UI/Select/Select";
 import { useState } from "react";
-import { createControl } from "../../form/formFrameWork";
+import {
+  createControl,
+  validate,
+  validateForm,
+} from "../../form/formFrameWork";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
 
 function createOption(number) {
   return createControl(
     {
-      label: "your answer",
+      label: `your option ${number}`,
       placeholder: `option ${number}`,
       errorMessage: "can't be empty",
       id: number,
@@ -43,16 +47,37 @@ function createControlForms() {
 const CreateQuiz = () => {
   const [state, setState] = useState({
     quiz: [],
+    isFormValid: false,
     rightAnswerid: 1,
     formControls: createControlForms(),
   });
   const onSubmitHandler = (event) => {
     event.preventDefault();
   };
-  const addQuestionHandler = () => {};
-  const addQuizHandler = () => {};
+  const addQuestionHandler = (event) => {
+    event.preventDefault();
+  };
+  const addQuizHandler = (event) => {
+    event.preventDefault();
+  };
 
-  const onChangeHandler = (value, controlName) => {};
+  const onChangeHandler = (value, controlName) => {
+    const formControls = { ...state.formControls };
+    const control = { ...formControls[controlName] };
+
+    control.value = value;
+    control.touched = true;
+    // if (control.value === "") {
+    //   control.touched = false;
+    // }
+    control.valid = validate(control.value, control.validation);
+    formControls[controlName] = control;
+    setState({
+      ...state,
+      formControls,
+      isFormValid: validateForm(formControls),
+    });
+  };
 
   const renderControls = () => {
     return Object.keys(state.formControls).map((controlName, index) => {
@@ -75,7 +100,12 @@ const CreateQuiz = () => {
       );
     });
   };
-  const selectChangeHandler = (event) => {};
+  const selectChangeHandler = (event) => {
+    setState({
+      ...state,
+      rightAnswerid: +event.target.value,
+    });
+  };
   const select = (
     <Select
       label="Choose right answer"
@@ -95,11 +125,18 @@ const CreateQuiz = () => {
       <div className={classes.container11}>
         <form name="formCreate" onSubmit={onSubmitHandler}>
           {renderControls()}
-          <br />
-          <Button onClick={addQuestionHandler}>Create Quiz</Button>
-          <Button onClick={addQuizHandler}>Add Question</Button>
-          <br />
           {select}
+          <br />
+          <Button disabled={!state.isFormValid} onClick={addQuizHandler}>
+            Add Question
+          </Button>
+          <Button
+            disabled={state.quiz.length === 0}
+            onClick={addQuestionHandler}
+          >
+            Create Quiz
+          </Button>
+          <br />
           {/* <select className="form-select" aria-label="Default select example">
             <option defaultValue="dcs">Choose the number of answers</option>
             <option value="1">One</option>

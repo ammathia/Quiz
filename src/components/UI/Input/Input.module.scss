@@ -1,5 +1,6 @@
 .Input {
   display: inline;
+
   input {
     text-align: center;
     width: 20rem;
@@ -31,6 +32,7 @@
 .Input.invalid {
   span {
     color: red;
+    // display: inline-block;
   }
   input {
     border: 3px solid red;

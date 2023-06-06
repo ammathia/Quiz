@@ -1,6 +1,6 @@
 .CreateQuiz {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -22,6 +22,7 @@
 
   form {
     width: 100%;
+    height: auto;
 
     p {
       margin: 0.5rem 0;
@@ -47,7 +48,12 @@
     }
     div:first-of-type input {
       min-width: 40rem;
-      display: block;
+      // display: block;
+    }
+
+    div:first-of-type label span {
+      // display: inline;
+      font-size: 2rem;
     }
   }
 }

@@ -67,7 +67,7 @@ const Login = (props) => {
 
     control.value = event.target.value;
     control.touched = true;
-    if (control.value == "") {
+    if (control.value === "") {
       control.touched = false;
     }
     control.valid = validateControl(control.value, control.validation);
