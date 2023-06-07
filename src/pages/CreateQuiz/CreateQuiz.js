@@ -12,6 +12,7 @@ import {
   validateForm,
 } from "../../form/formFrameWork";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
+import axios from "axios";
 
 function createOption(number) {
   return createControl(
@@ -48,7 +49,7 @@ const CreateQuiz = () => {
   const [state, setState] = useState({
     quiz: [],
     isFormValid: false,
-    rightAnswerid: 1,
+    rightAnswerid: "Choose right answer",
     selectTouch: false,
     formControls: createControlForms(),
   });
@@ -90,19 +91,34 @@ const CreateQuiz = () => {
     setState({
       quiz,
       isFormValid: false,
-      rightAnswerid: 1,
+      rightAnswerid: "Choose right answer",
       selectTouch: false,
       formControls: createControlForms(),
     });
   };
-  const addQuizHandler = (event) => {
+  const createQuizHandler = async (event) => {
     event.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "https://react-quiz-d85ec-default-rtdb.europe-west1.firebasedatabase.app/quizes.json",
+        state.quiz
+      );
+      console.log(response);
+      setState({
+        quiz: [],
+        isFormValid: false,
+        rightAnswerid: "Choose right answer",
+        selectTouch: false,
+        formControls: createControlForms(),
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
   const onChangeHandler = (value, controlName) => {
     const formControls = { ...state.formControls };
     const control = { ...formControls[controlName] };
-
-    const selectTouch = state.selectTouch;
 
     control.value = value;
     control.touched = true;
@@ -152,6 +168,7 @@ const CreateQuiz = () => {
       value={state.rightAnswerid}
       onChange={selectChangeHandler}
       options={[
+        { text: "Choose one right answer", value: "default" },
         { text: "1", value: "1" },
         { text: "2", value: "2" },
         { text: "3", value: "3" },
@@ -173,16 +190,13 @@ const CreateQuiz = () => {
           >
             Add Question
           </Button>
-          <Button disabled={state.quiz.length === 0} onClick={addQuizHandler}>
+          <Button
+            disabled={state.quiz.length === 0}
+            onClick={createQuizHandler}
+          >
             Create Quiz
           </Button>
           <br />
-          {/* <select className="form-select" aria-label="Default select example">
-            <option defaultValue="dcs">Choose the number of answers</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select> */}
         </form>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./QuizList.module.scss";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const QuizList = () => {
   return (
