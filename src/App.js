@@ -15,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Quiz />}></Route>
+          <Route path="/src/pages/Quiz/:id" element={<Quiz />}></Route>
           <Route path="/QuizMath" element={<QuizMath />}></Route>
           <Route path="/QuizList" element={<QuizList />}></Route>
           <Route path="/CreateQuiz" element={<CreateQuiz />}></Route>
