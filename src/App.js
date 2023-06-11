@@ -3,7 +3,7 @@ import React from "react";
 import { Layout } from "./hoc/Layout/Layout";
 import { Quiz } from "./pages/Quiz/Quiz";
 import { QuizMath } from "./pages/QuizMath/QuizMath";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, matchPath } from "react-router-dom";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { QuizList } from "./pages/QuizList/QuizList";
 import { CreateQuiz } from "./pages/CreateQuiz/CreateQuiz";

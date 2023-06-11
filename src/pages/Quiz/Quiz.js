@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Quiz.module.scss";
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
+import axios from "../../axios/axios-quiz";
+import { useParams } from "react-router-dom";
 
 const Quiz = (props) => {
+  const { id } = useParams();
   const [state, setState] = useState({
     isFinished: false,
     activeNumber: 0,
@@ -69,7 +72,6 @@ const Quiz = (props) => {
 
       const timeout = window.setTimeout(() => {
         if (isQuizFinished()) {
-          console.log("finished");
           setState({ ...state, isFinished: true });
         } else {
           setState({
@@ -98,7 +100,12 @@ const Quiz = (props) => {
   const isQuizFinished = () => {
     return state.activeNumber + 1 === state.quiz.length;
   };
-
+  useEffect(() => {
+    const fetchQuiz = async () => {
+      const response = await axios.get(`/quizes/${id}.json`);
+    };
+    fetchQuiz();
+  }, []);
   return (
     <div className={classes.Quiz}>
       <h1>Quiz</h1>

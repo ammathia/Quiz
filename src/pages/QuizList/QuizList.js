@@ -3,7 +3,7 @@ import classes from "./QuizList.module.scss";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
+import axios from "../../axios/axios-quiz";
 import Loader from "../../components/UI/Loader/Loader";
 
 const QuizList = () => {
@@ -15,9 +15,7 @@ const QuizList = () => {
   useEffect(() => {
     async function fetchData() {
       const quizes = [];
-      const response = await axios.get(
-        "https://react-quiz-d85ec-default-rtdb.europe-west1.firebasedatabase.app/quizes.json"
-      );
+      const response = await axios.get("/quizes.json");
       Object.keys(response.data).forEach((key, index) => {
         quizes.push({
           id: key,

@@ -5,14 +5,14 @@ import Button from "../../components/UI/Button/Button";
 import Form from "react-bootstrap/Form";
 import FormSelect from "react-bootstrap/FormSelect";
 import Select from "../../components/UI/Select/Select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   createControl,
   validate,
   validateForm,
 } from "../../form/formFrameWork";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary";
-import axios from "axios";
+import axios from "../../axios/axios-quiz";
 
 function createOption(number) {
   return createControl(
@@ -100,10 +100,7 @@ const CreateQuiz = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://react-quiz-d85ec-default-rtdb.europe-west1.firebasedatabase.app/quizes.json",
-        state.quiz
-      );
+      const response = await axios.post("/quizes.json", state.quiz);
       console.log(response);
       setState({
         quiz: [],
