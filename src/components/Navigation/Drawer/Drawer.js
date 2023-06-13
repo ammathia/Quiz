@@ -18,7 +18,7 @@ function Drawer(props) {
       <nav className={cls.join(" ")}>
         <ul>
           <li>
-            <NavLink onClick={onClickHandler} to="/QuizList">
+            <NavLink onClick={onClickHandler} to="/">
               QuizList
             </NavLink>
           </li>
@@ -33,11 +33,11 @@ function Drawer(props) {
               CreateQuiz
             </NavLink>
           </li>
-          <li>
-            <NavLink onClick={onClickHandler} to="/">
+          {/* <li>
+            <NavLink onClick={onClickHandler} to="/Quiz">
               Quiz
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink
               to={{

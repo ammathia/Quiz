@@ -37,7 +37,7 @@ const QuizList = () => {
     return state.quizes.map((quiz) => {
       return (
         <li key={quiz.id}>
-          <NavLink to={"/src/pages/Quiz/" + quiz.id}>{quiz.name}</NavLink>
+          <NavLink to={"/Quiz/" + quiz.id}>{quiz.name}</NavLink>
         </li>
       );
     });

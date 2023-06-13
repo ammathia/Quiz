@@ -67,7 +67,7 @@ const CreateQuiz = () => {
     const questionItem = {
       question: question.value,
       id: index,
-      rightAnswerid: state.rightAnswerid,
+      rightAnswer: state.rightAnswerid,
       answers: [
         {
           text: option1.value,

@@ -66,7 +66,6 @@ const QuizMath = (props) => {
 
       const timeout = window.setTimeout(() => {
         if (isQuizFinished()) {
-          console.log("finished");
           setState({ ...state, isFinished: true });
         } else {
           setState({

@@ -19,6 +19,7 @@ const Input = (props) => {
       <label htmlFor="input">
         <span>{props.label}</span>
         <input
+          maxLength={props.maxLength}
           id={htmlFor}
           placeholder={placeholder1}
           type={type}

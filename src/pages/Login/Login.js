@@ -3,6 +3,7 @@ import classes from "./Login.module.scss";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import { useState } from "react";
+import axios from "axios";
 
 function emailValidation(email) {
   const re =
@@ -40,7 +41,38 @@ const Login = (props) => {
     },
   });
 
-  const loginHandler = () => {};
+  const registerHandler = async () => {
+    const authData = {
+      email: state.formControls.email.value,
+      password: state.formControls.password.value,
+      returnSecureToken: true,
+    };
+    try {
+      const response = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBi6xHI764GHfh-bpWJIKEItU8zzNMU6zY",
+        authData
+      );
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const loginHandler = async () => {
+    const authData = {
+      email: state.formControls.email.value,
+      password: state.formControls.password.value,
+      returnSecureToken: true,
+    };
+    try {
+      const response = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBi6xHI764GHfh-bpWJIKEItU8zzNMU6zY",
+        authData
+      );
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const onSubmitHandler = (event) => {
     event.preventDefault();
   };
@@ -83,6 +115,7 @@ const Login = (props) => {
       const control = state.formControls[controlName];
       return (
         <Input
+          maxLength="50"
           key={controlName + index}
           type={control.type}
           value={control.value}
@@ -110,11 +143,14 @@ const Login = (props) => {
             placeholder="Password"
             errorMessage="TEswevewvewwevt"
           ></Input> */}
-          <Button disabled={!state.isFormValid} onClick={loginHandler}>
-            Log-in
-          </Button>
-
-          <p className={classes.create}>Create account</p>
+          <div className={classes.divButton}>
+            <Button disabled={!state.isFormValid} onClick={loginHandler}>
+              Log-in
+            </Button>
+            <Button disabled={!state.isFormValid} onClick={registerHandler}>
+              Register
+            </Button>
+          </div>
         </form>
       </div>
     </div>

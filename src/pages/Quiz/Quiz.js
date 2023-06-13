@@ -4,6 +4,46 @@ import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
 import axios from "../../axios/axios-quiz";
 import { useParams } from "react-router-dom";
+import Loader from "../../components/UI/Loader/Loader";
+
+// const quiz1 = [
+//   {
+//     question: "What is the Earth's radius?",
+//     rightAnswer: 2,
+//     id: 1,
+//     answers: [
+//       { text: "10420.12 km", id: 1 },
+//       { text: "6371 km", id: 2 },
+//       { text: "3389 km", id: 3 },
+//       { text: "300,000 km/s", id: 4 },
+//     ],
+//   },
+//   {
+//     question: "What is the distance between the Earth and the Sun?",
+//     rightAnswer: 3,
+//     id: 2,
+//     answers: [
+//       { text: "1000 km", id: 1 },
+//       { text: "384000 km", id: 2 },
+//       { text: "149 mln km", id: 3 },
+//       { text: "10 bln km", id: 4 },
+//     ],
+//   },
+//   {
+//     question: 'What is an "astronomical unit" ?',
+//     rightAnswer: 1,
+//     id: 3,
+//     answers: [
+//       { text: "The distance between the Earth and the Sun", id: 1 },
+//       { text: "One of the measerments of the metric system", id: 2 },
+//       { text: "The distance light travels in one year", id: 3 },
+//       {
+//         text: "The time taken by the light to travel from the Sun to the Earth",
+//         id: 4,
+//       },
+//     ],
+//   },
+// ];
 
 const Quiz = (props) => {
   const { id } = useParams();
@@ -12,44 +52,8 @@ const Quiz = (props) => {
     activeNumber: 0,
     results: {},
     answerState: null,
-    quiz: [
-      {
-        question: "What is the Earth's radius?",
-        rightAnswer: 2,
-        id: 1,
-        answers: [
-          { text: "10420.12 km", id: 1 },
-          { text: "6371 km", id: 2 },
-          { text: "3389 km", id: 3 },
-          { text: "300,000 km/s", id: 4 },
-        ],
-      },
-      {
-        question: "What is the distance between the Earth and the Sun?",
-        rightAnswer: 3,
-        id: 2,
-        answers: [
-          { text: "1000 km", id: 1 },
-          { text: "384000 km", id: 2 },
-          { text: "149 mln km", id: 3 },
-          { text: "10 bln km", id: 4 },
-        ],
-      },
-      {
-        question: 'What is an "astronomical unit" ?',
-        rightAnswer: 1,
-        id: 3,
-        answers: [
-          { text: "The distance between the Earth and the Sun", id: 1 },
-          { text: "One of the measerments of the metric system", id: 2 },
-          { text: "The distance light travels in one year", id: 3 },
-          {
-            text: "The time taken by the light to travel from the Sun to the Earth",
-            id: 4,
-          },
-        ],
-      },
-    ],
+    loading: true,
+    quiz: [],
   });
 
   const onClickAnswerHandler = (answerId) => {
@@ -103,14 +107,25 @@ const Quiz = (props) => {
   useEffect(() => {
     const fetchQuiz = async () => {
       const response = await axios.get(`/quizes/${id}.json`);
+      const quiz = response.data;
+      setState({
+        isFinished: false,
+        activeNumber: 0,
+        results: {},
+        answerState: null,
+        quiz: quiz,
+        loading: false,
+      });
     };
     fetchQuiz();
-  }, []);
+  }, [id]);
   return (
     <div className={classes.Quiz}>
       <h1>Quiz</h1>
 
-      {state.isFinished ? (
+      {state.loading ? (
+        <Loader />
+      ) : state.isFinished ? (
         <FinishedQuiz
           results={state.results}
           quiz={state.quiz}

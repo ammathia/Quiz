@@ -14,10 +14,10 @@ function App() {
     <div className="container21">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Quiz />}></Route>
-          <Route path="/src/pages/Quiz/:id" element={<Quiz />}></Route>
+          <Route path="/Quiz/:id" element={<Quiz />}></Route>
+          {/* <Route path="/Quiz" element={<Quiz />}></Route> */}
           <Route path="/QuizMath" element={<QuizMath />}></Route>
-          <Route path="/QuizList" element={<QuizList />}></Route>
+          <Route path="/" element={<QuizList />}></Route>
           <Route path="/CreateQuiz" element={<CreateQuiz />}></Route>
           <Route path="/Login" element={<Login />}></Route>
           <Route path="*" element={<NotFoundPage />}></Route>
