@@ -33,7 +33,7 @@ const FinishedQuiz = (props) => {
             Correct answers {successCount} out of {props.quiz.length}{" "}
           </strong>
           <Button onClick={props.onRetry}>Restart</Button>
-          <Button className={classes.primary} onClick={props.onRetry}>
+          <Button className={classes.primary}>
             <Link to="/">QuizList</Link>
           </Button>
         </div>
