@@ -4,8 +4,16 @@ import "./index.scss";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./redux/store/store";
 import { Provider } from "react-redux";
+import { configureStore, compose, applyMiddleware } from "@reduxjs/toolkit";
+import rootReducer from "./redux/store/rootReducers";
+import thunk from "redux-thunk";
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: [thunk],
+  devTools: true,
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

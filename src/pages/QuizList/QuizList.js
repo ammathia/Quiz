@@ -3,37 +3,43 @@ import classes from "./QuizList.module.scss";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import axios from "../../axios/axios-quiz";
 import Loader from "../../components/UI/Loader/Loader";
+import { connect } from "react-redux";
+import axios from "../../axios/axios-quiz";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchQuizesStart,
+  fetchQuizesSuccess,
+  fetchQuizesError,
+} from "../../redux/quizSlice";
 
-const QuizList = () => {
-  const [state, setState] = useState({
-    quizes: [],
-    loading: true,
-  });
+const QuizList = (props) => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.quiz);
 
   useEffect(() => {
     async function fetchData() {
+      dispatch(fetchQuizesStart());
       const quizes = [];
       const response = await axios.get("/quizes.json");
+
       Object.keys(response.data).forEach((key, index) => {
         quizes.push({
           id: key,
           name: `Quiz ${index + 1}`,
         });
       });
-      setState({
-        quizes,
-        loading: false,
-      });
+      dispatch(fetchQuizesSuccess(quizes));
     }
 
-    fetchData().catch((er) => {
-      console.log(er);
+    fetchData().catch((e) => {
+      console.log(e);
+      dispatch(fetchQuizesError(e));
     });
   }, []);
 
   const renderQuizes = () => {
+    console.log(state);
     return state.quizes.map((quiz) => {
       return (
         <li key={quiz.id}>
@@ -48,22 +54,8 @@ const QuizList = () => {
         Here are some available quizes fetched from server:
       </h1>
       {state.loading ? <Loader /> : <ul> {renderQuizes()}</ul>}
-      {/* <li>
-        <Link to="/">Quiz</Link>
-      </li>
-      <li>
-        <Link
-          to={{
-            pathname: "/Quizmath",
-            search: "?a=1&b=2",
-            hash: "wfm-hash",
-          }}
-        >
-          QuizMath
-        </Link>
-      </li> */}
     </div>
   );
 };
 
-export { QuizList };
+export default connect()(QuizList);
