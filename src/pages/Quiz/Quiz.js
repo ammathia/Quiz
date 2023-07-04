@@ -5,6 +5,14 @@ import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
 import axios from "../../axios/axios-quiz";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/UI/Loader/Loader";
+import { connect, useDispatch, useSelector } from "react-redux";
+import {
+  fetchQuizStart,
+  fetchQuizSuccess,
+  fetchQuizError,
+  setState,
+  setResults,
+} from "../../redux/quizSlice";
 
 // const quiz1 = [
 //   {
@@ -47,14 +55,9 @@ import Loader from "../../components/UI/Loader/Loader";
 
 const Quiz = (props) => {
   const { id } = useParams();
-  const [state, setState] = useState({
-    isFinished: false,
-    activeNumber: 0,
-    results: {},
-    answerState: null,
-    loading: true,
-    quiz: [],
-  });
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.quiz);
+  const [urlQuiz, setUrlQuiz] = useState(`/quizes/${id}.json`);
 
   const onClickAnswerHandler = (answerId) => {
     if (state.answerState) {
@@ -64,41 +67,58 @@ const Quiz = (props) => {
       }
     }
 
-    const results = state.results;
+    const results = { ...state.results };
     const question = state.quiz[state.activeNumber];
 
     if (question.rightAnswer === answerId) {
       if (!results[question.id]) {
         results[question.id] = "success";
+        dispatch(setResults(results));
       }
 
-      setState({ ...state, answerState: { [answerId]: "success" }, results });
+      dispatch(
+        setState({
+          ...state,
+          answerState: { [answerId]: "success" },
+        })
+      );
 
       const timeout = window.setTimeout(() => {
         if (isQuizFinished()) {
-          setState({ ...state, isFinished: true });
+          dispatch(setState({ ...state, isFinished: true }));
         } else {
-          setState({
-            ...state,
-            activeNumber: state.activeNumber + 1,
-            answerState: null,
-          });
+          dispatch(
+            setState({
+              ...state,
+              activeNumber: state.activeNumber + 1,
+              answerState: null,
+            })
+          );
         }
       }, 500);
     } else {
       results[question.id] = "error";
-      setState({ ...state, answerState: { [answerId]: "error", results } });
+      dispatch(setResults(results));
+
+      dispatch(
+        setState({
+          ...state,
+          answerState: { [answerId]: "error" },
+        })
+      );
     }
   };
 
   const onRetryHandler = () => {
-    setState({
-      ...state,
-      isFinished: false,
-      activeNumber: 0,
-      results: {},
-      answerState: null,
-    });
+    dispatch(
+      setState({
+        ...state,
+        isFinished: false,
+        activeNumber: 0,
+        results: {},
+        answerState: null,
+      })
+    );
   };
 
   const isQuizFinished = () => {
@@ -106,24 +126,22 @@ const Quiz = (props) => {
   };
   useEffect(() => {
     const fetchQuiz = async () => {
-      const response = await axios.get(`/quizes/${id}.json`);
-      const quiz = response.data;
-      setState({
-        isFinished: false,
-        activeNumber: 0,
-        results: {},
-        answerState: null,
-        quiz: quiz,
-        loading: false,
-      });
+      dispatch(fetchQuizStart);
+      const response = await axios.get(urlQuiz);
+      dispatch(fetchQuizSuccess(response.data));
     };
-    fetchQuiz();
-  }, [id]);
+    fetchQuiz().catch((e) => {
+      console.log(e);
+      dispatch(fetchQuizError(e));
+    });
+    return () => {
+      onRetryHandler();
+    };
+  }, []);
   return (
     <div className={classes.Quiz}>
       <h1>Quiz</h1>
-
-      {state.loading ? (
+      {state.loading || !state.quiz ? (
         <Loader />
       ) : state.isFinished ? (
         <FinishedQuiz
@@ -147,4 +165,4 @@ const Quiz = (props) => {
   );
 };
 
-export { Quiz };
+export default connect()(Quiz);

@@ -16,6 +16,7 @@ import {
 const QuizList = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.quiz);
+  let response1 = null;
 
   useEffect(() => {
     async function fetchData() {
@@ -29,7 +30,7 @@ const QuizList = (props) => {
           name: `Quiz ${index + 1}`,
         });
       });
-      dispatch(fetchQuizesSuccess(quizes));
+      dispatch(fetchQuizesSuccess({ quizes }));
     }
 
     fetchData().catch((e) => {
@@ -39,7 +40,7 @@ const QuizList = (props) => {
   }, []);
 
   const renderQuizes = () => {
-    console.log(state);
+    console.log(response1);
     return state.quizes.map((quiz) => {
       return (
         <li key={quiz.id}>

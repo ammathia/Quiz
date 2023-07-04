@@ -1,7 +1,7 @@
 import "./App.scss";
 import React from "react";
 import { Layout } from "./hoc/Layout/Layout";
-import { Quiz } from "./pages/Quiz/Quiz";
+import Quiz from "./pages/Quiz/Quiz";
 import { QuizMath } from "./pages/QuizMath/QuizMath";
 import { Routes, Route, Link, matchPath } from "react-router-dom";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";

@@ -4,6 +4,11 @@ const initialState = {
   quizes: [],
   loading: false,
   error: null,
+  isFinished: false,
+  activeNumber: 0,
+  results: {},
+  answerState: null,
+  quiz: null,
 };
 
 const quizList = createSlice({
@@ -20,7 +25,7 @@ const quizList = createSlice({
       return {
         ...state,
         loading: false,
-        quizes: action.payload,
+        ...action.payload,
       };
     },
     fetchQuizesError(state, action) {
@@ -30,9 +35,48 @@ const quizList = createSlice({
         error: action.payload,
       };
     },
+    fetchQuizStart(state, action) {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
+    fetchQuizSuccess(state, action) {
+      return {
+        ...state,
+        loading: false,
+        quiz: action.payload,
+      };
+    },
+    fetchQuizError(state, action) {
+      return {
+        ...state,
+        loading: true,
+        error: action.payload,
+      };
+    },
+    setState(state, action) {
+      return {
+        ...action.payload,
+      };
+    },
+    setResults(state, action) {
+      return {
+        ...state,
+        results: action.payload,
+      };
+    },
   },
 });
 
-export const { fetchQuizesStart, fetchQuizesSuccess, fetchQuizesError } =
-  quizList.actions;
+export const {
+  fetchQuizesStart,
+  fetchQuizesSuccess,
+  fetchQuizesError,
+  fetchQuizStart,
+  fetchQuizSuccess,
+  fetchQuizError,
+  setState,
+  setResults,
+} = quizList.actions;
 export default quizList.reducer;
