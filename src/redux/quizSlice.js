@@ -61,6 +61,7 @@ const quizList = createSlice({
       };
     },
     setResults(state, action) {
+      console.log(action.payload);
       return {
         ...state,
         results: action.payload,

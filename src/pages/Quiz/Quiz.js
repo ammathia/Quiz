@@ -58,6 +58,7 @@ const Quiz = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.quiz);
   const [urlQuiz, setUrlQuiz] = useState(`/quizes/${id}.json`);
+  const [results1, setResults] = useState({});
 
   const onClickAnswerHandler = (answerId) => {
     if (state.answerState) {
@@ -67,13 +68,13 @@ const Quiz = (props) => {
       }
     }
 
-    const results = { ...state.results };
     const question = state.quiz[state.activeNumber];
+    const results = results1;
 
     if (question.rightAnswer === answerId) {
       if (!results[question.id]) {
         results[question.id] = "success";
-        dispatch(setResults(results));
+        setState({ ...results });
       }
 
       dispatch(
@@ -98,7 +99,7 @@ const Quiz = (props) => {
       }, 500);
     } else {
       results[question.id] = "error";
-      dispatch(setResults(results));
+      setState({ ...results });
 
       dispatch(
         setState({
@@ -145,7 +146,7 @@ const Quiz = (props) => {
         <Loader />
       ) : state.isFinished ? (
         <FinishedQuiz
-          results={state.results}
+          results={results1}
           quiz={state.quiz}
           onRetry={onRetryHandler}
         />
