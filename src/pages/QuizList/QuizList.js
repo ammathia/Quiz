@@ -37,7 +37,7 @@ const QuizList = (props) => {
       console.log(e);
       dispatch(fetchQuizesError(e));
     });
-  }, []);
+  }, [dispatch]);
 
   const renderQuizes = () => {
     console.log(response1);
