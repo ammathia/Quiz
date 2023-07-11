@@ -58,7 +58,7 @@ const Quiz = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.quiz);
   const [urlQuiz, setUrlQuiz] = useState(`/quizes/${id}.json`);
-  const [results1, setResults] = useState({});
+  // const [results1, setResults] = useState({});
 
   const onClickAnswerHandler = (answerId) => {
     if (state.answerState) {
@@ -69,12 +69,14 @@ const Quiz = (props) => {
     }
 
     const question = state.quiz[state.activeNumber];
-    const results = results1;
+    const results = { ...state.results };
 
     if (question.rightAnswer === answerId) {
       if (!results[question.id]) {
         results[question.id] = "success";
-        setState({ ...results });
+        // results.add = 45;
+        // dispatch(setResults({ ...state, results: results }));
+        // setState({ ...results });
       }
 
       dispatch(
@@ -86,24 +88,26 @@ const Quiz = (props) => {
 
       const timeout = window.setTimeout(() => {
         if (isQuizFinished()) {
-          dispatch(setState({ ...state, isFinished: true }));
+          dispatch(setState({ ...state, results: results, isFinished: true }));
         } else {
           dispatch(
             setState({
               ...state,
               activeNumber: state.activeNumber + 1,
               answerState: null,
+              results: results,
             })
           );
         }
       }, 500);
     } else {
       results[question.id] = "error";
-      setState({ ...results });
+      // setState({ ...results });
 
       dispatch(
         setState({
           ...state,
+          results: results,
           answerState: { [answerId]: "error" },
         })
       );
@@ -136,9 +140,20 @@ const Quiz = (props) => {
       dispatch(fetchQuizError(e));
     });
     return () => {
-      onRetryHandler();
+      dispatch(
+        setState({
+          quizes: [],
+          loading: false,
+          error: null,
+          isFinished: false,
+          activeNumber: 0,
+          results: {},
+          answerState: null,
+          quiz: null,
+        })
+      );
     };
-  }, []);
+  }, [urlQuiz, dispatch]);
   return (
     <div className={classes.Quiz}>
       <h1>Quiz</h1>
@@ -146,7 +161,7 @@ const Quiz = (props) => {
         <Loader />
       ) : state.isFinished ? (
         <FinishedQuiz
-          results={results1}
+          results={state.results}
           quiz={state.quiz}
           onRetry={onRetryHandler}
         />

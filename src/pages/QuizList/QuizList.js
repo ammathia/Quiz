@@ -16,7 +16,6 @@ import {
 const QuizList = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.quiz);
-  let response1 = null;
 
   useEffect(() => {
     async function fetchData() {
@@ -40,7 +39,6 @@ const QuizList = (props) => {
   }, [dispatch]);
 
   const renderQuizes = () => {
-    console.log(response1);
     return state.quizes.map((quiz) => {
       return (
         <li key={quiz.id}>
